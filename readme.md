@@ -7,5 +7,6 @@ Unfollower is a simple tool that allows you to unfollow all the users who don't 
 Follower is an follow tool that allows you to follow new users automatically. Open your favorite user's profile (or your own profile). Click following or followers tab and run the code that you copied from the follow.js file (read the Unfollower's description to learn how to run the code). It will follow the loaded users that you are not following and display the status of the process.
 
 <p align="center">
-  <img src="ss/ss.png"/>
+  <img src="ss/ssn.png" style="width:45%" />
+  <img src="ss/ssnn.png" style="width:45%;margin-left:10%;" />
 </p>
