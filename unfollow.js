@@ -7,7 +7,7 @@
 	var Popup = {
 		message: "Preparing.. Please wait.",
 		title: "Twitter Unfollower",
-		authorMessage: "  <small style='font-size:11px'>(Created by Özgür Senekci)</small>",
+		authorMessage: "<small style='font-size:11px;float:left'>Created by Özgür Senekci</small>",
 		created: false,
 		element: null,
 		create: function(){
@@ -51,7 +51,7 @@
 				var title = $(d.createElement("h4"));
 				title
 					.addClass("modal-title")
-					.html(this.title + this.authorMessage);
+					.html(this.title);
 
 				var closeButton = $(d.createElement("button"));
 				closeButton
@@ -73,12 +73,32 @@
 					.css("text-align", "center")
 					.html(this.message);
 
+				var footer = $(d.createElement("div"));
+				footer
+					.addClass("modal-footer")
+					.html(this.authorMessage);
+
+				var interrupt = $(d.createElement("a"));
+				interrupt
+					.html("interrupt")
+					.css({
+						float: "right",
+						fontSize: "10px",
+						cursor: "pointer"
+					 })
+					.hide()
+					.click(function(e){
+						Unfollower.interrupt();
+						e.preventDefault();
+					});
+
 				this.element = {
 					modal: modalParent,
 					title: title,
 					body: body,
 					curtain: curtain,
-					closeButton: closeButton
+					closeButton: closeButton,
+					interrupt: interrupt
 				};
 
 				modalParent.append(dialog);
@@ -87,6 +107,8 @@
 				header.append(title);
 				title.append(closeButton);
 				content.append(body);
+				content.append(footer);
+				footer.append(interrupt);
 				$(d.body).prepend(curtain);
 				$(d.body).append(modalParent);
 
@@ -121,21 +143,21 @@
 		allUsers: 0,
 		unfollowedUsers: 0,
 		notFollowing: 0,
-		popup: null,
 		interval: 0,
-		process: function(popup){
-			this.popup = popup;
-			popup.show();
+		process: function(){
+			Popup.show();
+			Popup.element.interrupt.show();
 			var self = this;
 			this.interval = setInterval(function(){
 				if( self.current < self.scrollCount ){
 					self.offset = (self.current + 10) * window.innerHeight;
 					window.scrollTo(0, self.offset);
 					self.current++;
-					self.popup.setMessage("<p>" + popup.message + "</p><p>Target scroll count: " + self.scrollCount + "</p><p>Current scroll count: " + self.current + "</p>");
+					Popup.setMessage("<p>" + Popup.message + "</p><p>Target scroll count: " + self.scrollCount + "</p><p>Current scroll count: " + self.current + "</p>");
 				}
 				else{
 					clearInterval(self.interval);
+					Popup.element.interrupt.hide();
 					self.removeThemAll();
 				}
 			}, 1300);
@@ -158,8 +180,8 @@
 				self = this;
 
 			if( length == 0 ){
-				this.popup.setMessage("<p>Visited users: " + self.allUsers + "</p><p>Not following: " + self.notFollowing + "</p><p>Unfollowed: " + self.unfollowedUsers + "</p>");
-				self.popup.element.closeButton.show();
+				Popup.setMessage("<p>Visited users: " + self.allUsers + "</p><p>Not following: " + self.notFollowing + "</p><p>Unfollowed: " + self.unfollowedUsers + "</p>");
+				Popup.element.closeButton.show();
 			}
 			else{
 				this.notFollowing = length;
@@ -169,17 +191,18 @@
 						notFollowing.eq(now).click();
 						now++;
 						self.unfollowedUsers++;
-						self.popup.setMessage("<p>Visited users: " + self.allUsers + "</p><p>Not following: " + self.notFollowing + "</p><p>Unfollowed: " + self.unfollowedUsers + "</p>");
+						Popup.setMessage("<p>Visited users: " + self.allUsers + "</p><p>Not following: " + self.notFollowing + "</p><p>Unfollowed: " + self.unfollowedUsers + "</p>");
 					}
 					else{
 						clearInterval(interval);
-						self.popup.element.closeButton.show();
+						Popup.element.closeButton.show();
 					}
 				}, 400);
 			}
 		},
 		interrupt: function(){
 			clearInterval(this.interval);
+			Popup.element.interrupt.hide();
 			this.removeThemAll();
 		}
 	};
@@ -189,11 +212,6 @@
 		Unfollower.scrollCount = parseInt(prompt("Enter scroll count"));
 
 		Unfollower.process(Popup);
-
-		window.Social13 = {
-			Unfollower: Unfollower
-		};
-
 	}
 
 })(document, jQuery);
