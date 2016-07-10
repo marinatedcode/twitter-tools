@@ -15,28 +15,28 @@
 
 				var curtain = $(d.createElement("div"));
 				curtain.css({
-					display: "none",
-					position: "fixed",
-					width: "100%",
-					height: "100%",
-					zIndex: "9998",
-					background: "rgba(0,0,0,.6)"
-				});
+					            display: "none",
+					            position: "fixed",
+					            width: "100%",
+					            height: "100%",
+					            zIndex: "9998",
+					            background: "rgba(0,0,0,.6)"
+				            });
 
 				var modalParent = $(d.createElement("div"));
 				modalParent.attr({
-					className: "modal fade",
-					id: "social13-twitter-unfollower-modal"
-                });
+					                 className: "modal fade",
+					                 id: "social13-twitter-unfollower-modal"
+				                 });
 				modalParent.css({
-					display: "none",
-					position: "fixed",
-					width: "450px",
-					top: "30%",
-					left: "50%",
-					marginLeft: "-225px",
-					zIndex: "9999"
-                });
+					                display: "none",
+					                position: "fixed",
+					                width: "450px",
+					                top: "30%",
+					                left: "50%",
+					                marginLeft: "-225px",
+					                zIndex: "9999"
+				                });
 
 				var dialog = $(d.createElement("div"));
 				dialog.addClass("modal-dialog");
@@ -56,11 +56,11 @@
 				closeButton.attr("id", "social13-twitter-unfollower-modal-close");
 				closeButton.html('<span aria-hidden="true">&times;</span>');
 				closeButton.css({
-					fontSize: "13px",
-					marginLeft: "5px",
-					cursor: "pointer",
-					display: "none"
-				});
+					                fontSize: "13px",
+					                marginLeft: "5px",
+					                cursor: "pointer",
+					                display: "none"
+				                });
 				closeButton.click(function(){
 					Popup.hide();
 				});
@@ -138,7 +138,7 @@
 		removeThemAll: function(){
 			scrollTo(0, 0);
 			this.allUsers = $(".Grid-cell.u-size1of2.u-lg-size1of3.u-mb10").length;
-			$(".FollowStatus").each(function(i,ele){
+			$(".FollowStatus").each(function(i, ele){
 				$(ele)
 					.parents(".Grid-cell.u-size1of2.u-lg-size1of3.u-mb10")
 					.remove();
@@ -175,7 +175,8 @@
 		}
 	};
 
-	if( confirm("Are you sure?") ){console.log(Popup);
+	if( confirm("Are you sure?") ){
+		console.log(Popup);
 
 		Unfollower.scrollCount = parseInt(prompt("Enter scroll count"));
 
