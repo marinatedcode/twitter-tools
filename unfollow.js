@@ -58,7 +58,6 @@
 					.attr("id", "social13-twitter-unfollower-modal-close")
 					.html('<span aria-hidden="true">&times;</span>')
 					.css({
-						fontSize: "13px",
 						marginLeft: "5px",
 						cursor: "pointer",
 						display: "none"
@@ -211,7 +210,7 @@
 
 		Unfollower.scrollCount = parseInt(prompt("Enter scroll count"));
 
-		Unfollower.process(Popup);
+		Unfollower.process();
 	}
 
 })(document, jQuery);
