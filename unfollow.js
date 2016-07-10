@@ -15,28 +15,28 @@
 
 				var curtain = $(d.createElement("div"));
 				curtain.css({
-					            display: "none",
-					            position: "fixed",
-					            width: "100%",
-					            height: "100%",
-					            zIndex: "9998",
-					            background: "rgba(0,0,0,.6)"
-				            });
+					display: "none",
+					position: "fixed",
+					width: "100%",
+					height: "100%",
+					zIndex: "9998",
+					background: "rgba(0,0,0,.6)"
+				});
 
 				var modalParent = $(d.createElement("div"));
 				modalParent.attr({
-					                 className: "modal fade",
-					                 id: "social13-twitter-unfollower-modal"
-				                 });
+					 className: "modal fade",
+					 id: "social13-twitter-unfollower-modal"
+				 });
 				modalParent.css({
-					                display: "none",
-					                position: "fixed",
-					                width: "450px",
-					                top: "30%",
-					                left: "50%",
-					                marginLeft: "-225px",
-					                zIndex: "9999"
-				                });
+					display: "none",
+					position: "fixed",
+					width: "450px",
+					top: "30%",
+					left: "50%",
+					marginLeft: "-225px",
+					zIndex: "9999"
+				});
 
 				var dialog = $(d.createElement("div"));
 				dialog.addClass("modal-dialog");
@@ -45,30 +45,34 @@
 				content.addClass("modal-content");
 
 				var header = $(d.createElement("div"));
-				header.addClass("modal-header");
-				header.css("cursor", "default");
+				header
+					.addClass("modal-header")
+					.css("cursor", "default");
 
 				var title = $(d.createElement("h4"));
-				title.addClass("modal-title");
-				title.html(this.title + this.authorMessage);
+				title
+					.addClass("modal-title")
+					.html(this.title + this.authorMessage);
 
 				var closeButton = $(d.createElement("button"));
-				closeButton.attr("id", "social13-twitter-unfollower-modal-close");
-				closeButton.html('<span aria-hidden="true">&times;</span>');
-				closeButton.css({
-					                fontSize: "13px",
-					                marginLeft: "5px",
-					                cursor: "pointer",
-					                display: "none"
-				                });
-				closeButton.click(function(){
-					Popup.hide();
-				});
+				closeButton
+					.attr("id", "social13-twitter-unfollower-modal-close")
+					.html('<span aria-hidden="true">&times;</span>')
+					.css({
+						fontSize: "13px",
+						marginLeft: "5px",
+						cursor: "pointer",
+						display: "none"
+					})
+					.click(function(){
+						Popup.hide();
+					});
 
 				var body = $(d.createElement("div"));
-				body.addClass("modal-body");
-				body.css("text-align", "center");
-				body.html(this.message);
+				body
+					.addClass("modal-body")
+					.css("text-align", "center")
+					.html(this.message);
 
 				this.element = {
 					modal: modalParent,
