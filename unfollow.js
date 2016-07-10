@@ -2,7 +2,7 @@
  * Created by social13 on 7/9/16.
  */
 
-(function(d, w, $){
+(function(d, $){
 
 	var Popup = {
 		message: "Preparing.. Please wait.",
@@ -12,7 +12,6 @@
 		element: null,
 		create: function(){
 			if( this.created === false ){
-
 				var curtain = $(d.createElement("div"));
 				curtain.css({
 					display: "none",
@@ -123,18 +122,20 @@
 		unfollowedUsers: 0,
 		notFollowing: 0,
 		popup: null,
+		interval: 0,
 		process: function(popup){
 			this.popup = popup;
 			popup.show();
 			var self = this;
-			var interval = setInterval(function(){
+			this.interval = setInterval(function(){
 				if( self.current < self.scrollCount ){
 					self.offset = (self.current + 10) * window.innerHeight;
 					window.scrollTo(0, self.offset);
 					self.current++;
+					self.popup.setMessage("<p>" + popup.message + "</p><p>Target scroll count: " + self.scrollCount + "</p><p>Current scroll count: " + self.current + "</p>");
 				}
 				else{
-					clearInterval(interval);
+					clearInterval(self.interval);
 					self.removeThemAll();
 				}
 			}, 1300);
@@ -176,16 +177,23 @@
 					}
 				}, 400);
 			}
+		},
+		interrupt: function(){
+			clearInterval(this.interval);
+			this.removeThemAll();
 		}
 	};
 
 	if( confirm("Are you sure?") ){
-		console.log(Popup);
 
 		Unfollower.scrollCount = parseInt(prompt("Enter scroll count"));
 
 		Unfollower.process(Popup);
 
+		window.Social13 = {
+			Unfollower: Unfollower
+		};
+
 	}
 
-})(document, window, jQuery);
+})(document, jQuery);
